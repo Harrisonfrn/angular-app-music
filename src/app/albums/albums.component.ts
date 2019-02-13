@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // Importez la définition de la classe et les albums
 import { Album } from '../album';
 import { ALBUMS } from '../mock-albums';
+import { AlbumService } from 'src/app/album.service';
 
 @Component({
   selector: 'app-albums',
@@ -16,7 +17,9 @@ export class AlbumsComponent implements OnInit {
   selectedAlbum : Album;
   status: string = null; // pour gérer l'affichage des caractères [play] 
 
-  constructor() { }
+  constructor(private ablumService: AlbumService) {
+    this.ablumService.getAlbums();
+   }
 
   ngOnInit() {
   }

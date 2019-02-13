@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Album } from 'src/app/album';
+import { AlbumService } from '../album.service';
 
 import{ ALBUM_LISTS } from '../mock-albums';
 
@@ -9,15 +10,10 @@ import{ ALBUM_LISTS } from '../mock-albums';
   styleUrls: ['./album-details.component.scss']
 })
 export class AlbumDetailsComponent implements OnInit {
-
-  @Input() album: Album; // propriété [album] liée 
+  @Input() album:Album;
   @Output() onPlay: EventEmitter<Album> = new EventEmitter();
+  albumList = ALBUM_LISTS;
 
-  play(album: Album) {
-    this.onPlay.emit(album); // émettre un album vers le parent
-    }
-
-  albumLists: List[] = ALBUM_LISTS; // récupération de la liste des chasons
   songs: Array<string> = [];
 
   constructor() { }
@@ -31,7 +27,7 @@ export class AlbumDetailsComponent implements OnInit {
     // des chansons.
     if(this.album){
       // récupération de la liste des chansons
-      this.songs = this.albumLists.find(elem => elem.id === this.album.id).list;
+      this.songs = this.albumList.find(elem => elem.id === this.album.id).list;
     }
    
   }
@@ -39,5 +35,5 @@ export class AlbumDetailsComponent implements OnInit {
   play(album: Album) {
     this.onPlay.emit(album); // émettre un album vers le parent
   }
-}
 
+}
